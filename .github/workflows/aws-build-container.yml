@@ -12,6 +12,9 @@ on:
       tags:
         required: true
         type: string
+      platforms:
+        required: true
+        type: string
     secrets:
       aws-oidc-role:
         required: true
@@ -26,9 +29,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        PLATFORM:
-          - linux/amd64
-          - linux/arm64
+        PLATFORM: ${{ inputs.platforms }}
     steps:
       - name: checkout
         uses: actions/checkout@v3
