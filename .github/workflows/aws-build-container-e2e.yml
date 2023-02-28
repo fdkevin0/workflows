@@ -7,11 +7,13 @@ on:
     paths:
       - Dockerfile
       - .github/workflows/aws-build-container-e2e.yaml
+      - .github/workflows/aws-build-container.yaml
   pull_request:
     branches: [main]
     paths:
       - Dockerfile
       - .github/workflows/aws-build-container-e2e.yaml
+      - .github/workflows/aws-build-container.yaml
 
 jobs:
   call-build-container:
