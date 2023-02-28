@@ -20,7 +20,6 @@ jobs:
     uses: ./.github/workflows/aws-build-container.yml
     with:
       container-name: alpine
-      aws-oidc-role: ${{ secrets.AWS_OIDC_ROLE }}
       aws-region: us-east-2
       tags: |
         type=schedule
@@ -30,6 +29,8 @@ jobs:
         type=semver,pattern={{major}}.{{minor}}
         type=semver,pattern={{major}}
         type=sha
-      platforms:
+      platforms: |
         - linux/amd64
         - linux/arm64
+    secrets:
+      aws-oidc-role: ${{ secrets.AWS_OIDC_ROLE }}
