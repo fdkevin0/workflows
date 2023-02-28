@@ -14,7 +14,8 @@ on:
       - .github/workflows/aws-build-container-e2e.yaml
 
 jobs:
-  uses: fdkevin0/workflows/.github/workflows/aws-build-container.yml@main
+  call-build-container:
+    uses: fdkevin0/workflows/.github/workflows/aws-build-container.yml@main
     with:
       container-name: alpine
       aws-oidc-role: ${{ secrets.AWS_OIDC_ROLE }}
