@@ -6,15 +6,15 @@ on:
       container-name:
         required: true
         type: string
-      aws-oidc-role:
-        required: true
-        type: string
       aws-region:
         required: true
         type: string
       tags:
         required: true
         type: string
+    secrets:
+      aws-oidc-role:
+        required: true
 
 permissions:
   id-token: write # This is required for requesting the JWT
@@ -36,7 +36,7 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          role-to-assume: ${{ inputs.aws-oidc-role }}
+          role-to-assume: ${{ secrets.aws-oidc-role }}
           aws-region: ${{ inputs.aws-region }}
 
       - name: Login to Amazon ECR Private
@@ -80,7 +80,7 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          role-to-assume: ${{ inputs.aws-oidc-role }}
+          role-to-assume: ${{ secrets.aws-oidc-role }}
           aws-region: ${{ inputs.aws-region }}
       - name: Login to Amazon ECR Private
         id: login-ecr
