@@ -1,0 +1,32 @@
+name: Build Container and Push to AWS ECR
+
+on:
+  push:
+    branches: [main]
+    tags: [v*]
+    paths:
+      - Dockerfile
+      - .github/workflows/aws-build-container-e2e.yaml
+  pull_request:
+    branches: [main]
+    paths:
+      - Dockerfile
+      - .github/workflows/aws-build-container-e2e.yaml
+
+jobs:
+  uses: fdkevin0/workflows/.github/workflows/aws-build-container.yml@main
+    with:
+      container-name: alpine
+      aws-oidc-role: ${{ secrets.AWS_OIDC_ROLE }}
+      aws-region: us-east-2
+      tags: |
+        type=schedule
+        type=ref,event=branch
+        type=ref,event=pr
+        type=semver,pattern={{version}}
+        type=semver,pattern={{major}}.{{minor}}
+        type=semver,pattern={{major}}
+        type=sha
+      platforms:
+        - linux/amd64
+        - linux/arm64
