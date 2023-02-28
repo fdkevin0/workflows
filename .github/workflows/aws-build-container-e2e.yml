@@ -6,18 +6,18 @@ on:
     tags: [v*]
     paths:
       - Dockerfile
-      - .github/workflows/aws-build-container-e2e.yaml
-      - .github/workflows/aws-build-container.yaml
+      - .github/workflows/aws-build-container-e2e.yml
+      - .github/workflows/aws-build-container.yml
   pull_request:
     branches: [main]
     paths:
       - Dockerfile
-      - .github/workflows/aws-build-container-e2e.yaml
-      - .github/workflows/aws-build-container.yaml
+      - .github/workflows/aws-build-container-e2e.yml
+      - .github/workflows/aws-build-container.yml
 
 jobs:
   call-build-container:
-    uses: fdkevin0/workflows/.github/workflows/aws-build-container.yml@main
+    uses:./.github/workflows/aws-build-container.yml
     with:
       container-name: alpine
       aws-oidc-role: ${{ secrets.AWS_OIDC_ROLE }}
