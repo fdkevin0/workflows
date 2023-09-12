@@ -49,7 +49,7 @@ jobs:
 
       - name: Docker meta
         id: meta
-        uses: docker/metadata-action@v4
+        uses: docker/metadata-action@v5
         with:
           images: ${{ steps.login-ecr.outputs.registry }}/${{ inputs.container-name }}
           tags: ${{ inputs.tags }}
@@ -88,7 +88,7 @@ jobs:
         uses: aws-actions/amazon-ecr-login@v1
       - name: Docker meta
         id: metadata
-        uses: docker/metadata-action@v4
+        uses: docker/metadata-action@v5
         with:
           images: ${{ steps.login-ecr.outputs.registry }}/${{ inputs.container-name }}
           tags: ${{ inputs.tags }}
